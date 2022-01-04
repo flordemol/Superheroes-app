@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Formik, Field, Form } from 'formik';
+import axios from 'axios';
 
 function FormLogin() {
 
-    const [user, setUser] = useState({
-        email : "",
-        password : ""
-    });
+    const baseURL = "http://challenge-react.alkemy.org/";
 
     const validation = values => {
         let errors = {};
@@ -28,40 +25,51 @@ function FormLogin() {
                     password: '',
                 }}
                 onSubmit={ async (values) => {
-                    setUser({ ...values });
+                    try {
+                        await axios
+                        .post(baseURL, {
+                            email: values.email,
+                            password: values.password,
+                        })
+                        .then((response) => {
+                            const { token } = response.data;
+                            localStorage.setItem("token", token);
+                        });
+                    } catch(err){
+                        console.error(err);
+                    }
                 }}
                 validate={validation}
             >
             {
                 ({ errors }) => (
-                <Form>
-                    <div className="form-group">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <Field
-                            type="email"
-                            className="form-control"
-                            name="email"
-                            id="email"
-                            placeholder="Ingresá tu email"
-                        />
-                    </div>
-                    <small className="text-danger mb-1" style={{display: 'block', minHeight: '20px'}}>{errors.email}</small>
-                    <div className="form-group">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <Field
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            id="password"
-                            placeholder="*****"
-                        />
-                    </div>
-                    <small className="text-danger mb-3" style={{display: 'block', minHeight: '20px'}}>{errors.password}</small>
-                    <div className="d-grid gap-2 ">
-                        <button className="btn btn-primary" type="submit">Enviar</button>
-                    </div>
-                </Form>
-
+                    <Form>
+                        <div className="form-group">
+                            <label htmlFor="email" className="form-label">Email</label>
+                            <Field
+                                type="email"
+                                className="form-control"
+                                name="email"
+                                id="email"
+                                placeholder="Ingresá tu email"
+                            />
+                        </div>
+                        <small className="text-danger mb-1" style={{display: 'block', minHeight: '20px'}}>{errors.email}</small>
+                        <div className="form-group">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <Field
+                                type="password"
+                                className="form-control"
+                                name="password"
+                                id="password"
+                                placeholder="*****"
+                            />
+                        </div>
+                        <small className="text-danger mb-3" style={{display: 'block', minHeight: '20px'}}>{errors.password}</small>
+                        <div className="d-grid gap-2 ">
+                            <button className="btn btn-primary" type="submit">Enviar</button>
+                        </div>
+                    </Form>
                 )
             }
             </Formik>
