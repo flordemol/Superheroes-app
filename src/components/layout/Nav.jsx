@@ -3,18 +3,18 @@ import logo from "./../../images/logo.png";
 
 function Nav() {
     const style = {
-        color:"rgb(0, 9, 102)",
+        color:"#FAFAFA",
         fontSize:"2rem",
         textDecoration: "none",
-        fontFamily:"fantasy",
+        fontFamily:"sans-serif",
     }
 
     return (
-        <nav className="navbar navbar-light" style={{background:"#FEE8E8"}}>
+        <nav className="navbar navbar-light" style={{background:"darkslategrey"}}>
             <div className="container-fluid">
             <Link to="/" style={style}>
                 <img src={logo} alt="Logo" style={{height: "40px"}}/>
-                Superhéroes
+                Superhéroes App
             </Link>
             </div>
         </nav>
