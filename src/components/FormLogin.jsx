@@ -1,3 +1,4 @@
+import { useState} from "react";
 import { Formik, Field, Form } from 'formik';
 import axios from 'axios';
 
@@ -5,7 +6,10 @@ function FormLogin() {
 
     const baseURL = "http://challenge-react.alkemy.org/";
 
+    const [error, setError] = useState(null);
+
     const validation = values => {
+        setError(null);
         let errors = {};
        
         if (!values.email) {
@@ -36,6 +40,7 @@ function FormLogin() {
                             localStorage.setItem("token", token);
                         });
                     } catch(err){
+                        setError("Credenciales incorrectas");
                         console.error(err);
                     }
                 }}
@@ -68,6 +73,9 @@ function FormLogin() {
                         <small className="text-danger mb-3" style={{display: 'block', minHeight: '20px'}}>{errors.password}</small>
                         <div className="d-grid gap-2 ">
                             <button className="btn btn-primary" type="submit">Enviar</button>
+                        </div>
+                        <div className={`${error && "alert alert-danger mt-3 p-2"} text-center`}>
+                            { error }
                         </div>
                     </Form>
                 )
