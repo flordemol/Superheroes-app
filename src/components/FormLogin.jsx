@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function FormLogin() {
 
-    const { BASE_URL_AUTH } = environment;
+    const { BASE_URL_AUTH, key } = environment;
 
     const [error, setError] = useState(null);
 
@@ -32,7 +32,7 @@ function FormLogin() {
                 onSubmit={ async (values) => {
                     try {
                         await axios
-                        .post(BASE_URL_AUTH, {
+                        .post(`${BASE_URL_AUTH}${key}`, {
                             email: values.email,
                             password: values.password,
                         })
