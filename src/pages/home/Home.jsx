@@ -1,7 +1,9 @@
+import Nav from "../../components/layout/Nav";
+
 function Home() {
   return (
     <>
-      Home
+      <Nav />
     </>
   );
 }

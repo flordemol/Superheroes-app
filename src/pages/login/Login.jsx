@@ -1,5 +1,4 @@
 import FormLogin from "../../components/FormLogin";
-import "./login.css";
 
 function Login() {
   return (
