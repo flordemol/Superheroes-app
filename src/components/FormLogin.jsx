@@ -1,10 +1,11 @@
 import { useState} from "react";
+import { environment } from "./../constants/index";
 import { Formik, Field, Form } from 'formik';
 import axios from 'axios';
 
 function FormLogin() {
 
-    const baseURL = "http://challenge-react.alkemy.org/";
+    const { BASE_URL_AUTH } = environment;
 
     const [error, setError] = useState(null);
 
@@ -31,7 +32,7 @@ function FormLogin() {
                 onSubmit={ async (values) => {
                     try {
                         await axios
-                        .post(baseURL, {
+                        .post(BASE_URL_AUTH, {
                             email: values.email,
                             password: values.password,
                         })
