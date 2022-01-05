@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { environment } from "./../constants/index";
+import { SearchContext } from "../context/SearchContext";
 import { Formik, Field, Form } from 'formik';
-import background from "./../images/fondo.jpg";
 import axios from 'axios';
 
 function Buscador() {
+
+    const { newSearch } = useContext(SearchContext);
 
     const { BASE_URL_SUPERHERO, key } = environment;
 
@@ -22,11 +25,11 @@ function Buscador() {
                     search: '',
                 }}
                 onSubmit={ async (values) => {
-                   
                     try {
-                        await axios.get(`${BASE_URL_SUPERHERO}${key}/search/batman`)
+                        await axios.get(`${BASE_URL_SUPERHERO}${key}/search/${values.search}`)
                             .then((response) => {
-                             console.log(response.data.results)
+                                newSearch(response.data.results);
+                                values.search = '';
                             });
                     } catch(err){
                         console.error(err);
