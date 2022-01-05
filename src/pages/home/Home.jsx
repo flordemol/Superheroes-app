@@ -12,7 +12,7 @@ function Home() {
     <>
       <Nav />
       <Buscador />
-      <ContainerCard />
+      <ContainerCard search={search}/>
     </>
   );
 }
