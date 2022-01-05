@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Card({ hero }) {
 
   const { id, name, image } = hero;
@@ -16,9 +18,14 @@ function Card({ hero }) {
     return (
       <div className="container-card" id={`hero-${id}`} style={styleCard}>
         <h3 className="text-center">{name}</h3>
-        <img src={image.url} alt={name} style={{width:"250px", height:"350px"}}/>
+        <img src={image.url} alt={name} style={{maxWidth:"250px", height:"350px"}}/>
         <button className="btn btn-warning">Agregar</button>
-        <button className="btn btn-info">Ver detalle</button>
+        <Link
+          to={`/hero/${id}`}
+          className="btn btn-info"
+        >
+          Ver detalle
+        </Link>
       </div>
     );
   }
