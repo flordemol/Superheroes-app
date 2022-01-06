@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { TeamContext } from "../context/TeamContext";
+import { useContext } from "react";
 
 function Card({ hero }) {
 
   const { id, name, image } = hero;
+
+  const { team, addTeam } = useContext(TeamContext);
 
   const styleCard = {
     background:"#111",
@@ -19,7 +23,7 @@ function Card({ hero }) {
       <div className="container-card" id={`hero-${id}`} style={styleCard}>
         <h3 className="text-center">{name}</h3>
         <img src={image.url} alt={name} style={{maxWidth:"250px", height:"350px"}}/>
-        <button className="btn btn-warning">Agregar</button>
+        <button className="btn btn-warning" onClick={() => addTeam(hero)}>Agregar al equipo</button>
         <Link
           to={`/hero/${id}`}
           className="btn btn-info"
