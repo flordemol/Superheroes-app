@@ -6,13 +6,13 @@ import { SearchContext } from "../../context/SearchContext";
 
 function Home() {
 
-  const { search } = useContext(SearchContext);
+  const { search, nameHero } = useContext(SearchContext);
 
   return (
     <>
       <Nav />
       <Buscador />
-      <ContainerCard search={search}/>
+      <ContainerCard data={search} title={`Busqueda por: ${nameHero}`}/>
     </>
   );
 }

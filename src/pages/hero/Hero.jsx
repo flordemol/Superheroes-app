@@ -29,7 +29,7 @@ function Hero() {
   
 
     return (
-      <>{console.log(hero)}
+      <>
         <Nav />
         <div className="container justify-content-center  align-items-center p-4 pb-5" style={{marginTop:"3%", marginBottom:"3%", background:"#111"}}>
           <h2 className="text-white text-center p-4">{hero?.name}</h2>

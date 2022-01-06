@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function Buscador() {
 
-    const { newSearch } = useContext(SearchContext);
+    const { newSearch, setNameHero } = useContext(SearchContext);
 
     const { BASE_URL_SUPERHERO, key } = environment;
 
@@ -29,6 +29,7 @@ function Buscador() {
                         await axios.get(`${BASE_URL_SUPERHERO}${key}/search/${values.search}`)
                             .then((response) => {
                                 newSearch(response.data.results);
+                                setNameHero(response.data['results-for'])
                                 values.search = '';
                             });
                     } catch(err){
